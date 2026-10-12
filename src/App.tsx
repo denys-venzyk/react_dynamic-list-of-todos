@@ -9,11 +9,27 @@ import { TodoModal } from './components/TodoModal';
 import { Loader } from './components/Loader';
 import { getTodos } from './api';
 import { Todo } from './types/Todo';
+import { Status } from './types/Status';
 
 export const App: React.FC = () => {
   const [loading, setLodaing] = useState(true);
   const [todos, setTodos] = useState<Todo[]>([]);
   const [selected, setSelected] = useState<Todo | null>(null);
+
+  const [query, setQuery] = useState('');
+  const [status, setStatus] = useState<Status>('all');
+
+  const normalizedQuery = query.toLowerCase();
+
+  const visibleTodos = todos.filter(todo => {
+    const matchesQuery = todo.title.toLowerCase().includes(normalizedQuery);
+
+    const matchingStatus =
+      status === 'all' ||
+      (status === 'completed' ? todo.completed : !todo.completed);
+
+    return matchesQuery && matchingStatus;
+  });
 
   function handleSelect(todo: Todo | null) {
     setSelected(todo);
@@ -33,13 +49,18 @@ export const App: React.FC = () => {
             <h1 className="title">Todos:</h1>
 
             <div className="block">
-              <TodoFilter />
+              <TodoFilter
+                query={query}
+                status={status}
+                onQueryChange={setQuery}
+                onStatusChange={setStatus}
+              />
             </div>
 
             <div className="block">
               {loading && <Loader />}
               {!loading && todos.length > 0 && (
-                <TodoList todos={todos} onSelect={handleSelect} />
+                <TodoList todos={visibleTodos} onSelect={handleSelect} />
               )}
             </div>
           </div>
