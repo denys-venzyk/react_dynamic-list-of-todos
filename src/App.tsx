@@ -46,7 +46,9 @@ export const App: React.FC = () => {
         </div>
       </div>
 
-      {selected && <TodoModal todo={selected} />}
+      {selected && (
+        <TodoModal todo={selected} onClose={() => setSelected(null)} />
+      )}
     </>
   );
 };

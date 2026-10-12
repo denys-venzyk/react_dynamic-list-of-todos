@@ -9,23 +9,22 @@ type Props = {
 export const TodoList: React.FC<Props> = ({ todos, onSelect }) => {
   return (
     <table className="table is-narrow is-fullwidth">
-      {todos.map(todo => (
-        <>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>
-                <span className="icon">
-                  <i className="fas fa-check" />
-                </span>
-              </th>
-              <th>Title</th>
-              <th> </th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <tr data-cy="todo" className="">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>
+            <span className="icon">
+              <i className="fas fa-check" />
+            </span>
+          </th>
+          <th>Title</th>
+          <th> </th>
+        </tr>
+      </thead>
+      <tbody>
+        {todos.map(todo => (
+          <>
+            <tr data-cy="todo" className="" key={todo.id}>
               <td className="is-vcentered">{todo.id}</td>
               <td className="is-vcentered" />
               <td className="is-vcentered is-expanded">
@@ -44,9 +43,9 @@ export const TodoList: React.FC<Props> = ({ todos, onSelect }) => {
                 </button>
               </td>
             </tr>
-          </tbody>
-        </>
-      ))}
+          </>
+        ))}
+      </tbody>
     </table>
   );
 };
