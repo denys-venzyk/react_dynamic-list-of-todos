@@ -60,7 +60,11 @@ export const App: React.FC = () => {
             <div className="block">
               {loading && <Loader />}
               {!loading && todos.length > 0 && (
-                <TodoList todos={visibleTodos} onSelect={handleSelect} />
+                <TodoList
+                  todos={visibleTodos}
+                  onSelect={handleSelect}
+                  selectedTodo={selected}
+                />
               )}
             </div>
           </div>
