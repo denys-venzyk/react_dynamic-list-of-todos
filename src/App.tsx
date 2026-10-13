@@ -58,7 +58,7 @@ export const App: React.FC = () => {
             </div>
 
             <div className="block">
-              {loading && <Loader />}
+              {loading && todos.length === 0 && <Loader />}
               {!loading && todos.length > 0 && (
                 <TodoList
                   todos={visibleTodos}
