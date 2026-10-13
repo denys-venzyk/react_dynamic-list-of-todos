@@ -12,7 +12,7 @@ import { Todo } from './types/Todo';
 import { Status } from './types/Status';
 
 export const App: React.FC = () => {
-  const [loading, setLodaing] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [todos, setTodos] = useState<Todo[]>([]);
   const [selected, setSelected] = useState<Todo | null>(null);
 
@@ -38,7 +38,7 @@ export const App: React.FC = () => {
   useEffect(() => {
     getTodos()
       .then(setTodos)
-      .finally(() => setLodaing(false));
+      .finally(() => setLoading(false));
   }, []);
 
   return (
